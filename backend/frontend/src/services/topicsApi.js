@@ -1,4 +1,4 @@
-const API_URL = "/api/topics";
+const API_URL = "https://javarespository.onrender.com/api/topics";
 
 export async function getTopics() {
   const res = await fetch(API_URL);

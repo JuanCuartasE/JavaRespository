@@ -55,22 +55,22 @@ export default function TopicsPage() {
   return (
     <div className="frame-container">
       <header style={{ marginBottom: '2.5rem' }}>
-        <h1 style={{ fontFamily: 'var(--font-title)', fontSize: '2.5rem', fontWeight: '700' }}>
-          {editingId ? "Edit Topic" : "What's on your mind?"}
+        <h1 className="page-title">
+          {editingId ? "Editar Tema" : "¿En qué estás pensando?"}
         </h1>
       </header>
 
       <div className="input-frame">
-        <form onSubmit={handleSubmit}>
+        <form className="topic-form" onSubmit={handleSubmit}>
           <input
-            placeholder="Topic Title"
+            placeholder="Título del tema"
             value={title}
             onChange={e => setTitle(e.target.value)}
             disabled={loading}
             required
           />
           <textarea
-            placeholder="Add a detailed description..."
+            placeholder="Añade una descripción detallada..."
             value={description}
             onChange={e => setDescription(e.target.value)}
             disabled={loading}
@@ -83,11 +83,11 @@ export default function TopicsPage() {
                 className="btn-secondary"
                 onClick={() => { setEditingId(null); setTitle(""); setDescription(""); }}
               >
-                Cancel
+                Cancelar
               </button>
             )}
             <button type="submit" className="btn-primary" disabled={loading}>
-              {loading ? "Saving..." : (editingId ? "Save Changes" : "Create Topic")}
+              {loading ? "Guardando..." : (editingId ? "Guardar Cambios" : "Crear Tema")}
             </button>
           </div>
         </form>
@@ -97,16 +97,16 @@ export default function TopicsPage() {
         {topics.map(t => (
           <div key={t.id} className="topic-card" onClick={() => startEdit(t)}>
             <h3>{t.title}</h3>
-            <p>{t.description || "No description provided."}</p>
-            <div style={{ alignSelf: 'flex-end', fontSize: '0.8rem', opacity: 0.6 }}>
-              Click to Edit
+            <p>{t.description || "Sin descripción proporcionada."}</p>
+            <div style={{ alignSelf: 'flex-end', fontSize: '0.8rem', opacity: 0.6, marginTop: '1rem' }}>
+              Presiona para editar
             </div>
           </div>
         ))}
 
         {!loading && topics.length === 0 && (
           <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-dim)' }}>
-            No topics yet. Start by creating one above!
+            No hay temas aún. ¡Empieza creando uno arriba!
           </div>
         )}
       </div>
