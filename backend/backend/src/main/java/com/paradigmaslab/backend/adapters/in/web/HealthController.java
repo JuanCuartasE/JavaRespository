@@ -8,6 +8,6 @@ public class HealthController {
 
     @GetMapping("/api/health")
     public String health() {
-        return "OK - Paradigmas Lab backend running Wuuuuuuu!";
+        return "Mi novia Elizabeth Castro es la mujer mas hermosa del mundo";
     }
 }
