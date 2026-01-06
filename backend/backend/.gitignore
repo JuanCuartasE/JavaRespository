@@ -9,7 +9,7 @@ target/
 .classpath
 .DS_Store
 .env
-ypath
+.factorypath
 .project
 .settings
 .springBeans
