@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { getTopics, createTopic, updateTopic } from "../services/topicsApi";
-import { useTheme } from "../context/ThemeContext";
 
 export default function TopicsPage() {
-  const { isDark, toggleTheme } = useTheme();
   const [topics, setTopics] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -28,6 +26,7 @@ export default function TopicsPage() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!title.trim()) return;
     setLoading(true);
 
     try {
@@ -51,74 +50,63 @@ export default function TopicsPage() {
     setEditingId(topic.id);
     setTitle(topic.title);
     setDescription(topic.description);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function cancelEdit() {
-    setEditingId(null);
-    setTitle("");
-    setDescription("");
   }
 
   return (
-    <div className="app-container">
-      <nav className="navbar">
-        <h1>Paradigmas Lab</h1>
-        <button className="theme-toggle" onClick={toggleTheme} title="Cambiar tema">
-          {isDark ? "☀️" : "🌙"}
-        </button>
-      </nav>
+    <div className="frame-container">
+      <header style={{ marginBottom: '2.5rem' }}>
+        <h1 style={{ fontFamily: 'var(--font-title)', fontSize: '2.5rem', fontWeight: '700' }}>
+          {editingId ? "Edit Topic" : "What's on your mind?"}
+        </h1>
+      </header>
 
-      <div className="glass-card">
-        <h2 style={{ marginBottom: "1rem", fontSize: "1.2rem" }}>
-          {editingId ? "📝 Editar Tema" : "✨ Crear Nuevo Tema"}
-        </h2>
-        <form className="topic-form" onSubmit={handleSubmit}>
+      <div className="input-frame">
+        <form onSubmit={handleSubmit}>
           <input
-            placeholder="¿De qué quieres hablar?"
+            placeholder="Topic Title"
             value={title}
             onChange={e => setTitle(e.target.value)}
             disabled={loading}
             required
           />
           <textarea
-            placeholder="Añade una descripción detallada..."
+            placeholder="Add a detailed description..."
             value={description}
             onChange={e => setDescription(e.target.value)}
             disabled={loading}
             rows="3"
           />
-          <div style={{ display: "flex", gap: "1rem" }}>
-            <button className="btn-primary" type="submit" disabled={loading} style={{ flex: 1 }}>
-              {loading ? "..." : (editingId ? "Actualizar Tema" : "Publicar Tema")}
-            </button>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
             {editingId && (
-              <button className="btn-edit" type="button" onClick={cancelEdit}>
-                Cancelar
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={() => { setEditingId(null); setTitle(""); setDescription(""); }}
+              >
+                Cancel
               </button>
             )}
+            <button type="submit" className="btn-primary" disabled={loading}>
+              {loading ? "Saving..." : (editingId ? "Save Changes" : "Create Topic")}
+            </button>
           </div>
         </form>
       </div>
 
-      <div className="topic-grid">
+      <div className="topic-list">
         {topics.map(t => (
-          <div key={t.id} className="glass-card topic-item">
-            <div>
-              <h3>{t.title}</h3>
-              <p>{t.description || "Sin descripción"}</p>
-            </div>
-            <div className="topic-actions">
-              <button className="btn-edit" onClick={() => startEdit(t)}>
-                ✏️ Editar
-              </button>
+          <div key={t.id} className="topic-card" onClick={() => startEdit(t)}>
+            <h3>{t.title}</h3>
+            <p>{t.description || "No description provided."}</p>
+            <div style={{ alignSelf: 'flex-end', fontSize: '0.8rem', opacity: 0.6 }}>
+              Click to Edit
             </div>
           </div>
         ))}
 
         {!loading && topics.length === 0 && (
-          <div className="glass-card" style={{ gridColumn: "1 / -1", textAlign: "center", color: "var(--text-dim)" }}>
-            No hay temas creados todavía. ¡Sé el primero!
+          <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-dim)' }}>
+            No topics yet. Start by creating one above!
           </div>
         )}
       </div>
