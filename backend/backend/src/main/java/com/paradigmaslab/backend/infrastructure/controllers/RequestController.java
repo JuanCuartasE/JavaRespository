@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/requests")
-@CrossOrigin(origins = "*") // Allow for local development
 public class RequestController {
     private final RequestUseCase requestUseCase;
 
