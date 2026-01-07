@@ -20,7 +20,9 @@ public class RequestController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('USUARIO_COMUN', 'ADMIN', 'OWNER')")
-    public Request createRequest(@RequestBody Request request) {
+    public Request createRequest(@RequestBody Request request, Authentication authentication) {
+        // Automatically link the request to the currently logged-in user
+        request.setUser(authentication.getName());
         return requestUseCase.createRequest(request);
     }
 
