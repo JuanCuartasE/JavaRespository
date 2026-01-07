@@ -1,7 +1,9 @@
 import { useTheme } from "../context/ThemeContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function Sidebar() {
     const { isDark, toggleTheme } = useTheme();
+    const { logout } = useAuth();
 
     return (
         <aside className="sidebar">
@@ -24,6 +26,9 @@ export default function Sidebar() {
             </div>
 
             <div className="footer-sidebar">
+                <button className="btn-logout" onClick={logout}>
+                    <span>🚪</span> Cerrar Sesión
+                </button>
                 <div className="theme-switch" onClick={toggleTheme}>
                     <div className={`theme-icon ${!isDark ? 'active' : ''}`}>☀️</div>
                     <div className={`theme-icon ${isDark ? 'active' : ''}`}>🌙</div>

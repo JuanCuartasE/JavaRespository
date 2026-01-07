@@ -188,6 +188,33 @@ button {
   transform: translateY(-1px);
 }
 
+.status-badge.incidente {
+  background: rgba(255, 69, 58, 0.1);
+  color: #ff453a;
+  border: 1px solid rgba(255, 69, 58, 0.2);
+}
+
+.status-badge.requerimiento {
+  background: rgba(10, 132, 255, 0.1);
+  color: #0a84ff;
+  border: 1px solid rgba(10, 132, 255, 0.2);
+}
+
+.status-badge.consulta {
+  background: rgba(172, 172, 180, 0.1);
+  color: #acacb4;
+  border: 1px solid rgba(172, 172, 180, 0.2);
+}
+
+.priority-score {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  background: rgba(0, 122, 255, 0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
 .btn-secondary {
   background-color: rgba(255, 255, 255, 0.05);
   color: var(--text-main);
@@ -271,5 +298,89 @@ button {
 
   .main-content {
     padding: 2rem 1.5rem;
+  }
+}
+
+/* Authentication Styles */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1c1e 0%, #2d3436 100%);
+}
+
+.auth-frame {
+  max-width: 400px;
+  width: 90%;
+  padding: 2.5rem;
+  animation: fadeIn 0.5s ease;
+  background-color: var(--bg-card);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.auth-footer {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0 0.5rem;
+  font-family: var(--font-main);
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  background-color: rgba(255, 69, 58, 0.1);
+  color: #ff453a;
+  padding: 0.8rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 69, 58, 0.2);
+}
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 69, 58, 0.1);
+  color: #ff453a;
+  border: 1px solid rgba(255, 69, 58, 0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  transition: var(--transition);
+}
+
+.btn-logout:hover {
+  background: rgba(255, 69, 58, 0.2);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
