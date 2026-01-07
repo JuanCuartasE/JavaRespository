@@ -8,9 +8,9 @@ public class TypeRule implements PriorityRule {
     @Override
     public double calculateScore(Request request) {
         if (request.getType() == RequestType.INCIDENTE) {
-            return 50.0; // High weight for incidents
+            return 10.0;
         } else if (request.getType() == RequestType.REQUERIMIENTO) {
-            return 20.0;
+            return 5.0;
         }
         return 0.0;
     }

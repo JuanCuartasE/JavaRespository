@@ -99,7 +99,7 @@ const RequestPage = () => {
                                             {req.type}
                                         </span>
                                         <span className="priority-score">
-                                            Puntaje: {req.calculatedPriority.toFixed(1)}
+                                            Puntaje: {Number(req.calculatedPriority).toFixed(1)}
                                         </span>
                                     </div>
                                     <h3>{req.user}</h3>
