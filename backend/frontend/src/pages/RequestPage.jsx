@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { getSortedRequests, createRequest } from '../services/requestsApi';
+import { useAuth } from '../context/AuthContext';
 
 const RequestPage = () => {
+    const { user: authUser } = useAuth();
     const [requests, setRequests] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     // Form state
-    const [user, setUser] = useState('');
     const [type, setType] = useState('CONSULTA');
     const [manualPriority, setManualPriority] = useState(3);
 
@@ -34,8 +35,8 @@ const RequestPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await createRequest({ user, type, manualPriority });
-            setUser('');
+            // We don't send 'user' here anymore because the backend takes it from the Token (authentication.getName())
+            await createRequest({ type, manualPriority });
             setType('CONSULTA');
             setManualPriority(3);
             fetchRequests();
@@ -48,7 +49,7 @@ const RequestPage = () => {
         <div className="page-container">
             <header className="page-header">
                 <h1>Motor de Priorización</h1>
-                <p>Gestión inteligente de solicitudes</p>
+                <p>Bienvenido, <strong>{authUser?.username}</strong> ({authUser?.role})</p>
             </header>
 
             <div className="frames-grid">
@@ -58,17 +59,6 @@ const RequestPage = () => {
                         <h2>Nueva Solicitud</h2>
                     </div>
                     <form onSubmit={handleSubmit} className="topic-form">
-                        <div className="form-group">
-                            <label>Usuario</label>
-                            <input
-                                type="text"
-                                value={user}
-                                onChange={(e) => setUser(e.target.value)}
-                                placeholder="Nombre del usuario"
-                                required
-                            />
-                        </div>
-
                         <div className="form-group">
                             <label>Tipo de Solicitud</label>
                             <select value={type} onChange={(e) => setType(e.target.value)}>

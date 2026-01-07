@@ -8,19 +8,13 @@ export default function Sidebar() {
     return (
         <aside className="sidebar">
             <div>
-                <h2 className="sidebar-title">Paradigmas Lab</h2>
+                <h2 className="sidebar-title">Motor de Priorización</h2>
                 <ul className="nav-list">
                     <li className="nav-item active">
-                        <span>📥</span> Inbox
+                        <span>📥</span> Inbox (Solicitudes)
                     </li>
-                    <li className="nav-item">
-                        <span>🔖</span> Topics
-                    </li>
-                    <li className="nav-item">
-                        <span>📅</span> Upcoming
-                    </li>
-                    <li className="nav-item">
-                        <span>✅</span> Done
+                    <li className="nav-item" onClick={() => window.open('https://javarespository.onrender.com/swagger-ui/index.html#/', '_blank')}>
+                        <span>🚀</span> Swagger UI
                     </li>
                 </ul>
             </div>
