@@ -1,7 +1,7 @@
-const API_URL = import.meta.env.VITE_AUTH_URL || 'http://localhost:8080/api/auth';
+import { AUTH_URL } from '../config/api';
 
 export const loginUser = async (username, password) => {
-    const response = await fetch(`${API_URL}/login`, {
+    const response = await fetch(`${AUTH_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -11,7 +11,7 @@ export const loginUser = async (username, password) => {
 };
 
 export const signupUser = async (userData) => {
-    const response = await fetch(`${API_URL}/signup`, {
+    const response = await fetch(`${AUTH_URL}/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),

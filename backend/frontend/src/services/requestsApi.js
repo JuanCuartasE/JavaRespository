@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api/requests';
+import { REQUESTS_URL } from '../config/api';
 
 const getHeaders = () => {
     const token = localStorage.getItem('token');
@@ -9,7 +9,7 @@ const getHeaders = () => {
 };
 
 export const getSortedRequests = async () => {
-    const response = await fetch(API_URL, {
+    const response = await fetch(REQUESTS_URL, {
         headers: getHeaders(),
     });
     if (response.status === 401) {
@@ -21,7 +21,7 @@ export const getSortedRequests = async () => {
 };
 
 export const createRequest = async (requestData) => {
-    const response = await fetch(API_URL, {
+    const response = await fetch(REQUESTS_URL, {
         method: 'POST',
         headers: getHeaders(),
         body: JSON.stringify(requestData),
